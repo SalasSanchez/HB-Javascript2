@@ -1,0 +1,112 @@
+<!-- <!DOCTYPE html> -->
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>Sorting Hat</h1>
+    
+    <div class="container">
+        <div class="form">
+            <input type="number" id="student_count">
+            <button id="set_student_count">Set Student Count</button>
+            <div id="count"></div>
+            <input type="text" id="student_name">
+            <button id="get_name">Sort!</button>
+        </div>
+
+
+
+
+        <div class="house col-md-2">
+            Gryffindor
+        </div>
+        <div class="house col-md-2">
+            Hufflepuff
+        </div>
+        <div class="house col-md-2">
+            Ravenclaw
+        </div>
+        <div class="house col-md-2">
+            Slytherin
+        </div>
+        <div class="house col-md-2">
+            Dumbledore's Army
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var studentCount = 0;
+        var button= document.getElementById("set_student_count");
+        button.addEventListener("click", function(){
+            var countId = document.getElementById("count");
+            if (document.getElementById("student_count").value) {
+                var inputValue = document.getElementById("student_count").value;
+            } else {
+                inputValue = 0;
+            }
+            studentCount += parseInt(inputValue);
+            countId.innerHTML = studentCount;   
+            document.getElementById("student_count").value = 0;
+        })
+
+        //TODO: make it so that the houses populate the DOM
+        var studentName = document.getElementById("student_name").value;
+        var houses = { 
+            Gryffindor: [],
+            Hufflepuff: [],
+            Ravenclaw: [],
+            Slytherin: [],
+            "Dumbledore's Army": []
+        }
+
+        var allHouses = Object.keys(houses);
+        var button2= document.getElementById("get_name");
+        button2.addEventListener("click", function(){
+
+        //  check that the student count is greater than zero
+            // if count=0 or empty: stop
+            // if so, do this:
+                 // take the student name
+                 // Pick a random house
+                 // repeat until the student is placed:
+                    // check that the house is not full
+                    // if it is not full, place the student in that house
+                    // if it is full, pick another random house.
+                 // 
+
+            var random = Math.floor(Math.random() * allHouses.length);
+            var choiceHouse = allHouses[random];
+
+
+
+
+
+
+
+
+
+
+
+        })
+       
+
+
+
+    </script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  </body>
+</html>
