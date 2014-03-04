@@ -28,20 +28,20 @@
 
 
 
-        <div class="house col-md-2">
-            Gryffindor
+        <div id="Grfy" class="house col-md-2">
+            <h3>Gryffindor</h3>
         </div>
         <div class="house col-md-2">
-            Hufflepuff
+            <h3>Hufflepuff</h3>
         </div>
         <div class="house col-md-2">
-            Ravenclaw
+            <h3>Ravenclaw</h3>
         </div>
         <div class="house col-md-2">
-            Slytherin
+            <h3>Slytherin</h3>
         </div>
         <div class="house col-md-2">
-            Dumbledore's Army
+            <h3>Dumbledore's Army</h3>
         </div>
     </div>
 
@@ -80,34 +80,6 @@
             return choiceHouse;
         };
 
-        // TODO: This is not working!!
-        function houseIsNotFull(house) {
-            var full = studentCount / allHouses.length
-            while (house.length >= full) {
-                house = randomHouseGenerator(allHouses)
-            }
-            return true;
-        }
-
-        // full = totalcount / numHouses
-        // if house < full
-            // then push student
-        // otherwise find a new house
-
-
-        var button2 = document.getElementById("get_name");
-        button2.addEventListener("click", function(){
-            var studentName = document.getElementById("student_name").value;
-
-            if (studentCount > 0 && studentName) {
-
-                var choicehouse = randomHouseGenerator(allHouses);
-                if (houseIsNotFull(choicehouse)) {
-                    houses[choicehouse].push(studentName);
-                    //decrementing
-                }
-            }
-        });
         //  check that the student count is greater than zero
             // if count>0 && student name is not empty:
                  // take the student name
@@ -116,11 +88,30 @@
                     // check that the house is not full
                     // if it is not full, place the student in that house
                     // if it is full, pick another random house.
-                 // 
-       
-       
 
+        var button2 = document.getElementById("get_name");
+        button2.addEventListener("click", function(){
+            var studentName = document.getElementById("student_name").value;
+            var full = studentCount / allHouses.length
 
+            var circuitBreaker = true;
+            while (circuitBreaker){
+                if (studentCount > 0 && studentName) {
+                    var choicehouse = randomHouseGenerator(allHouses);
+                    if (houses[choicehouse].length < full) {
+                        houses[choicehouse].push(studentName);
+                        studentCount -= 1;
+                        document.getElementById("count").innerHTML = studentCount;
+                        for (i = 0; i < document.getElementsByClassName('house').length; i++) {
+                            if (choicehouse == document.getElementsByClassName('house')[i].getElementsByTagName('h3')[0].innerHTML){
+                                document.getElementsByClassName('house')[i].innerHTML += studentName;
+                            }
+                        }
+                        circuitBreaker = false;
+                    }
+                }
+            }
+        });
 
     </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
