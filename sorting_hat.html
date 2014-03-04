@@ -47,7 +47,7 @@
 
     <script type="text/javascript">
         var studentCount = 0;
-        var button= document.getElementById("set_student_count");
+        var button = document.getElementById("set_student_count");
         button.addEventListener("click", function(){
             var countId = document.getElementById("count");
             if (document.getElementById("student_count").value) {
@@ -58,10 +58,9 @@
             studentCount += parseInt(inputValue);
             countId.innerHTML = studentCount;   
             document.getElementById("student_count").value = 0;
-        })
+        });
 
         //TODO: make it so that the houses populate the DOM
-        var studentName = document.getElementById("student_name").value;
         var houses = { 
             Gryffindor: [],
             Hufflepuff: [],
@@ -71,12 +70,46 @@
         }
 
         var allHouses = Object.keys(houses);
-        var button2= document.getElementById("get_name");
-        button2.addEventListener("click", function(){
+        
+        // Create a random number between 0 and the length of the array
+        // use that number as the position of the array
+        // return the name house name
+        function randomHouseGenerator(myarray) {
+            var random = Math.floor(Math.random() * myarray.length);
+            var choiceHouse = myarray[random];
+            return choiceHouse;
+        };
 
+        // TODO: This is not working!!
+        function houseIsNotFull(house) {
+            var full = studentCount / allHouses.length
+            while (house.length >= full) {
+                house = randomHouseGenerator(allHouses)
+            }
+            return true;
+        }
+
+        // full = totalcount / numHouses
+        // if house < full
+            // then push student
+        // otherwise find a new house
+
+
+        var button2 = document.getElementById("get_name");
+        button2.addEventListener("click", function(){
+            var studentName = document.getElementById("student_name").value;
+
+            if (studentCount > 0 && studentName) {
+
+                var choicehouse = randomHouseGenerator(allHouses);
+                if (houseIsNotFull(choicehouse)) {
+                    houses[choicehouse].push(studentName);
+                    //decrementing
+                }
+            }
+        });
         //  check that the student count is greater than zero
-            // if count=0 or empty: stop
-            // if so, do this:
+            // if count>0 && student name is not empty:
                  // take the student name
                  // Pick a random house
                  // repeat until the student is placed:
@@ -84,21 +117,7 @@
                     // if it is not full, place the student in that house
                     // if it is full, pick another random house.
                  // 
-
-            var random = Math.floor(Math.random() * allHouses.length);
-            var choiceHouse = allHouses[random];
-
-
-
-
-
-
-
-
-
-
-
-        })
+       
        
 
 
